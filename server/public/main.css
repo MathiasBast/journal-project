@@ -1,0 +1,13 @@
+body {
+  background-color: silver; 
+  font-family: 'Roboto Mono', monospace;
+}
+
+.marginClass {
+  width: 80%;
+  height: 100vh;
+  text-align: center;
+  margin: 0 auto 0 auto;
+  padding: 30px;
+  background-color: skyblue;
+}
