@@ -1,6 +1,7 @@
 import React from 'react'
+import { Redirect } from 'react-router'
 
-import { logIn } from '../api/api'
+import { logIn, session } from '../api/api'
 
 class LogIn extends React.Component {
   constructor (props) {
@@ -8,19 +9,28 @@ class LogIn extends React.Component {
     this.state = {
       username: '',
       password: '',
-      data: 'a',
-      load: false
+      error: '',
+      logIn: false
     }
   }
   componentDidMount () {
-    logIn()
-    .then(res => {
-      this.setState({
-        data: res,
-        load: true
+    const { username, password } = this.state
+    if(username !== '' && password !== ''){
+      logIn(password, username)
+      .then(res => {
+        if(!res.logIn){
+          this.setState({
+            error: 'Username or Password Incorrect'
+          })
+        } else {
+          this.setState({
+            error: '',
+            logIn: true
+          })
+          this.props.loggedIn
+        }
       })
-      console.log(this.state.data)
-    })
+    }
   }
 
   handleUsernameChange = event => {
@@ -35,40 +45,39 @@ class LogIn extends React.Component {
     })
   }
 
-  handleSubmit = event => {
-    const { username, password } = this.state
-    const viewData = {
-      username,
-      password
-    }
-    console.log(viewData)
-    event.preventDefault()
-  }
-
   data = logIn
   render() {
     return (
       <>
-        <form>
-          <div>
-            <label>Username</label>
-            <input name='username' tpye='text' value={this.state.username} onChange={this.handleUsernameChange} />
-            <br></br>
-            <label>Password</label>
-            <input name='password' type='text' value={this.state.password} onChange={this.handlePasswordChange} />
-          </div>
-          <button className='button' type='submit' onClick={this.handleSubmit}>Submit</button>
-        </form>
+      { this.state.logIn && <Redirect to="/home" />}
+
+      <a className='hyper-link-remove' href='#/'><button className='back-button'type='button'>Back</button></a>
+      <div className='marginClass log-in'>
+        <div className='log-in-incorrect'>
+          <p>{this.state.error}</p>
+        </div>
+          <form>
+            <div>
+              <label>Username</label>
+              <input className='log-in-input' 
+              spellCheck="false" name='username' type='text' 
+              value={this.state.username} 
+              onChange={this.handleUsernameChange} />
+
+              <br></br>
+
+              <label>Password</label>
+              <input className='log-in-input' 
+              spellCheck="false" name='password' type='password' 
+              value={this.state.password} 
+              onChange={this.handlePasswordChange} />
+            </div>
+            <button className='log-in-button' type='button' onClick={() => this.componentDidMount()}>Submit</button>
+          </form>
+      </div>
       </>
     )
   }
 }
 
 export default LogIn
-
-// {this.state.load 
-//   ?<div>
-//     <h1>Log in page</h1>
-//     <p>{this.state.data.rows[0].value.first_name}</p>
-//   </div>
-//   : <p>Loading...</p>}

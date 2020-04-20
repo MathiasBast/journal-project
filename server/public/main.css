@@ -5,9 +5,155 @@ body {
 
 .marginClass {
   width: 80%;
-  height: 100vh;
   text-align: center;
   margin: 0 auto 0 auto;
   padding: 30px;
   background-color: skyblue;
+}
+
+.landing-img {
+  width: 600px;
+}
+
+.landing-hover{
+  position: absolute;
+  top: 200px;
+  left: 100%px;
+}
+
+@media screen and (max-width: 1300px){
+  .landing-hover {
+    color: blue;
+  }
+}
+
+.landing-footer {
+  margin: 0 auto 0 auto;
+  padding: 30px;
+  width: 80%;
+  height: 60px;
+  background-color: rgb(176, 212, 226);
+  text-align: center;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.landing-button {
+  float: right;
+  font-family: 'Roboto Mono', monospace;
+  background-color: red;
+  border: 2px solid white;
+  border-radius: 5px;
+  width: 70px;
+  height: 30px;
+}
+
+.landing-button:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid red;
+}
+
+.log-in {
+  width: 500px;
+  margin-top: 10%;
+  height: 320px;
+  padding: 20px 50px 50px 50px;
+}
+
+.log-in-button {
+  margin: 20px;
+  font-family: 'Roboto Mono', monospace;
+  background-color: red;
+  border: 2px solid white;
+  border-radius: 5px;
+  width: 70px;
+  height: 30px;
+  color: white;
+}
+
+.log-in-button:hover {
+  background-color: white;
+  color: red;
+  border: 2px solid red;
+  width: 75px;
+  height: 35px;
+  font-weight: bold;
+}
+
+.log-in-input {
+  width: 90%;
+  padding: 20px;
+  border: none;
+  border-bottom: black solid 3px;
+  font-size: 20px;
+  background-color: skyblue;
+  color: white;
+  margin: 7px;
+  outline: none;
+}
+
+.log-in-input:hover {
+  border-bottom: black solid 5px;
+  margin: 6px;
+}
+
+.log-in-incorrect {
+  height: 30px;
+  padding-bottom: 10px;
+  color: red;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-animation: autofill 0s forwards;
+  animation: autofill 0s forwards;
+}
+
+@keyframes autofill {
+  100% {
+    background: skyblue;
+    color: white;
+    font-size: 20px;
+  }
+}
+
+@-webkit-keyframes autofill {
+  100% {
+    background: transparent;
+    color: inherit;
+    font-size: inherit;
+  }
+}
+
+.back-button{
+  margin: 20px;
+  font-family: 'Roboto Mono', monospace;
+  background-color: red;
+  border: 2px solid white;
+  border-radius: 5px;
+  width: 70px;
+  height: 30px;
+  color: white;
+  margin: 0px;
+}
+
+.back-button:hover{
+  background-color: white;
+  color: red;
+  border: 2px solid red;
+  font-weight: bold;
+}
+
+.hyper-link-remove{
+  text-decoration: none;
+  color: inherit;
 }

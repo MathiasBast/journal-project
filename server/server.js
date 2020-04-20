@@ -5,6 +5,7 @@ const session = require('express-session')
 
 // routes import
 const logIn = require('./routes/logIn')
+const sessionCookie = require('./routes/sessionCookie')
 
 // session cookie stuff
 const THREE_HOURS = 1000 * 60 * 60 * 3
@@ -35,6 +36,8 @@ server.use(session({
 }))
 
 //routes
-server.use('api/v1/posts/journal/logIn', logIn)
+server.use('/api/v1/posts/journal/logIn', logIn)
+
+server.use('/api/v1/posts/journal/sessionCookie', sessionCookie)
 
 module.exports = server
