@@ -4,35 +4,44 @@ import { Redirect } from 'react-router'
 import { logIn, session } from '../api/api'
 
 class LogIn extends React.Component {
+  _isMounted = false
   constructor (props) {
     super(props)
     this.state = {
       username: '',
       password: '',
       error: '',
-      logIn: false
+      logIn: false,
+      runner: this.props.loggedIn
     }
   }
   componentDidMount () {
+    this._isMounted = true
+
     const { username, password } = this.state
     if(username !== '' && password !== ''){
       logIn(password, username)
       .then(res => {
-        if(!res.logIn){
+        if(res.logIn){
+            
           this.setState({
-            error: 'Username or Password Incorrect'
-          })
+            logIn: true
+          }, () => {this.state.runner()})
+          
         } else {
           this.setState({
-            error: '',
-            logIn: true
+            error: 'Username or password missing'
           })
-          this.props.loggedIn
         }
       })
+      
     }
   }
 
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+  
   handleUsernameChange = event => {
     this.setState({
       username: event.target.value
@@ -45,10 +54,11 @@ class LogIn extends React.Component {
     })
   }
 
-  data = logIn
+  
   render() {
     return (
       <>
+      
       { this.state.logIn && <Redirect to="/home" />}
 
       <a className='hyper-link-remove' href='#/'><button className='back-button'type='button'>Back</button></a>

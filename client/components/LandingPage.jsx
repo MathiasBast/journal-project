@@ -5,6 +5,7 @@ class LandingPage extends React.Component {
     return (
       <>
         <div className='marginClass' >
+        <a href='#/register'><button className='landing-button' >Register</button></a>
         <a href='#/logIn'><button className='landing-button' >Log In</button></a>
           <h1>Welcome To Your Journal!</h1>
           

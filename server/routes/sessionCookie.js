@@ -9,4 +9,16 @@ router.get(('/'), (req, res) => {
   res.json(data)
 })
 
+router.get('/access', (req,res) => {
+  data={
+    userID: req.session.userID,
+    userRev: req.session.userRev
+  }
+  if(!data.userID || !data.userRev) {
+    return false
+  } else {
+    return true
+  }
+})
+
 module.exports = router

@@ -19,6 +19,21 @@ export function logIn (password, username) {
 export function session () {
   return request.get(url + 'sessionCookie')
     .then(res => {
+      console.log('session api', res.body)
+      return res.body
+    })
+}
+
+export function logOut() {
+  return request.get(url + 'logOut/')
+  .then(res=>{
+    console.log(res)
+  })
+}
+
+export function LogInCheck () {
+  return request.get(url +'sessionCookie/access')
+    .then(res => {
       console.log(res.body)
       return res.body
     })

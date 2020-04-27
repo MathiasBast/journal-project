@@ -6,19 +6,34 @@ import { Route, Redirect } from 'react-router-dom'
 import LogIn from './Log_in'
 import Home from './Home'
 import LandingPage from './LandingPage'
+import LogOut from './LogOut'
+import NewPost from './NewPost'
+import { LogInCheck } from '../api/api'
+import Register from './Register'
 
 class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      logedIn: false
+      logedIn: 0
     }
     this.loggedIn = this.loggedIn.bind(this)
   }
+  
+  componentDidMount () {
+    
+    LogInCheck()
+    .then((res) =>{
+      this.setState ({
+        logedIn: res
+      })
+      console.log(this.state.logedIn)
+    })
+    
+  }
 
   loggedIn () {
-    console.log('working')
-    this.setState({
+    return this.setState({
       logedIn: true
     })
   }
@@ -33,27 +48,24 @@ class App extends React.Component {
     return (
       <>
         <Route exact path='/' component={LandingPage} />
-        <Route exact path='/LogIn' component={LogIn} loggedIn={this.loggedIn}/>
+        <Route exact path='/LogIn'>
+          {!this.state.logedIn ? <LogIn loggedIn={this.loggedIn} /> : <Redirect to='/home' /> }
+        </Route>
+        <Route exact path='/register'>
+          {!this.state.logedIn ? <Register /> : <Redirect to='/home' /> }
+        </Route>
         <Route exact path='/home'> 
          {this.state.logedIn ? <Home /> : <Redirect to='/' /> }
+       </Route>
+       <Route exact path='/LogOut'>
+         {this.state.logedIn ? <LogOut loggedOut={this.loggedOut} /> : <Redirect to='/' /> }
+       </Route>
+       <Route exact path='/NewPost'>
+         {this.state.logedIn ? <NewPost /> : <Redirect to='/' /> }
        </Route>
       </>
     )
   }
 }
-
-// logedIn () {
-//   console.log('func')
-// session()
-//   .then(data => {
-//     console.log(Object.keys(data).length !== 0)
-//     console.log('data:', data)
-//     if(Object.keys(data).length === 0){
-//       return false
-//     } 
-//     return true
-//   })
-// }
-
 
 export default App
