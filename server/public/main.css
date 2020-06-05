@@ -268,3 +268,46 @@ input:-webkit-autofill:active {
   margin: 10px;
   height: 25px;
 }
+
+.register {
+  width: 600px;
+}
+
+.register-input {
+  width: 90%;
+  padding: 15px;
+  border: none;
+  border-bottom: black solid 3px;
+  font-size: 20px;
+  background-color: skyblue;
+  color: white;
+  margin: 7px;
+  outline: none;
+}
+
+.register-input:hover {
+  border: black solid 1px;
+  border-bottom: black solid 4px;
+  margin: 6px;
+}
+
+.register-button {
+  margin: 20px;
+  font-family: 'Roboto Mono', monospace;
+  background-color: red;
+  border: 2px solid white;
+  border-radius: 5px;
+  width: 70px;
+  height: 30px;
+  color: white;
+}
+
+.register-button:hover {
+  background-color: white;
+  color: red;
+  border: 2px solid red;
+  width: 75px;
+  height: 35px;
+  font-weight: bold;
+}
+
