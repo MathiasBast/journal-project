@@ -12,46 +12,34 @@ class Register extends React.Component {
   }
 
   handleFirstNameChange = event => {
-    this.setState ({
+    this.setState({
       firstName: event.target.value
     })
   }
   handleLastNameChange = event => {
-    this.setState ({
+    this.setState({
       lastName: event.target.value
     })
   }
   handleEmailChange = event => {
-    this.setState ({
+    this.setState({
       email: event.target.value
     })
   }
   handleUsernameChange = event => {
-    this.setState ({
+    this.setState({
       username: event.target.value
     })
   }
   handlePasswordChange = event => {
-    this.setState ({
+    this.setState({
       password: event.target.value
     })
   }
   handleConPasswordChange = event => {
-    this.setState ({
+    this.setState({
       conPassword: event.target.value
     })
-    console.log(this.state.conPassword, this.state.password)
-    if(this.state.conPassword === this.state.password){
-      this.setState({
-        matching: true
-      })
-    } 
-    if(this.state.conPassword !== this.state.password) {
-      this.setState({
-        matching: false
-      })
-    }
-
   }
 
   render () {
