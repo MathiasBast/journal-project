@@ -41,6 +41,20 @@ class Register extends React.Component {
       conPassword: event.target.value
     })
   }
+  handleSubmitButton = event => {
+    event.preventDefault()
+    const { conPassword, password } = this.state
+    if (conPassword !== password) {
+      this.setState({
+        matching: true
+      })
+    } else {
+      this.setState({
+        matching: false
+      })
+    }
+    console.log(this.state)
+  }
 
   render () {
     return (
@@ -71,7 +85,7 @@ class Register extends React.Component {
           <label>Confirmation Password</label>
           <input autoComplete="off" className='register-input' type='password' value={this.state.conPassword} onChange={this.handleConPasswordChange} />
 
-          <button className='register-button' type='submit'>Submit</button>
+          <button onClick={this.handleSubmitButton} className='register-button' type='submit'>Submit</button>
         </form>
       </div>
     )
