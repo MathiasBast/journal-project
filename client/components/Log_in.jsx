@@ -19,29 +19,26 @@ class LogIn extends React.Component {
     this._isMounted = true
 
     const { username, password } = this.state
-    if(username !== '' && password !== ''){
+    if (username !== '' && password !== '') {
       logIn(password, username)
-      .then(res => {
-        if(res.logIn){
-            
-          this.setState({
-            logIn: true
-          }, () => {this.state.runner()})
-          
-        } else {
-          this.setState({
-            error: 'Username or password missing'
-          })
-        }
-      })
-      
+        .then(res => {
+          if (res.logIn) {
+            this.setState({
+              logIn: true
+            }, () => { this.state.runner() })
+          } else {
+            this.setState({
+              error: 'Username or password missing'
+            })
+          }
+        })
     }
   }
 
-  componentWillUnmount() {
-    this._isMounted = false;
+  componentWillUnmount () {
+    this._isMounted = false
   }
-  
+
   handleUsernameChange = event => {
     this.setState({
       username: event.target.value
@@ -54,11 +51,10 @@ class LogIn extends React.Component {
     })
   }
 
-  
-  render() {
+  render () {
     return (
       <>
-      
+
       { this.state.logIn && <Redirect to="/home" />}
 
       <a className='hyper-link-remove' href='#/'><button className='back-button'type='button'>Back</button></a>
@@ -66,24 +62,24 @@ class LogIn extends React.Component {
         <div className='log-in-incorrect'>
           <p>{this.state.error}</p>
         </div>
-          <form>
-            <div>
-              <label>Username</label>
-              <input className='log-in-input' 
-              spellCheck="false" name='username' type='text' 
-              value={this.state.username} 
+        <form>
+          <div>
+            <label>Username</label>
+            <input className='log-in-input'
+              spellCheck="false" name='username' type='text'
+              value={this.state.username}
               onChange={this.handleUsernameChange} />
 
-              <br></br>
+            <br></br>
 
-              <label>Password</label>
-              <input className='log-in-input' 
-              spellCheck="false" name='password' type='password' 
-              value={this.state.password} 
+            <label>Password</label>
+            <input className='log-in-input'
+              spellCheck="false" name='password' type='password'
+              value={this.state.password}
               onChange={this.handlePasswordChange} />
-            </div>
-            <button className='log-in-button' type='button' onClick={() => this.componentDidMount()}>Submit</button>
-          </form>
+          </div>
+          <button className='log-in-button' type='button' onClick={() => this.componentDidMount()}>Submit</button>
+        </form>
       </div>
       </>
     )
