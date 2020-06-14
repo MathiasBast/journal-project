@@ -19,17 +19,15 @@ class App extends React.Component {
     }
     this.loggedIn = this.loggedIn.bind(this)
   }
-  
+
   componentDidMount () {
-    
     LogInCheck()
-    .then((res) =>{
-      this.setState ({
-        logedIn: res
+      .then((res) => {
+        this.setState({
+          logedIn: res
+        })
+        console.log(this.state.logedIn)
       })
-      console.log(this.state.logedIn)
-    })
-    
   }
 
   loggedIn () {
@@ -43,7 +41,7 @@ class App extends React.Component {
       logedIn: false
     })
   }
-  
+
   render () {
     return (
       <>
@@ -54,9 +52,9 @@ class App extends React.Component {
         <Route exact path='/register'>
           {!this.state.logedIn ? <Register /> : <Redirect to='/home' /> }
         </Route>
-        <Route exact path='/home'> 
-         {this.state.logedIn ? <Home /> : <Redirect to='/' /> }
-       </Route>
+        <Route exact path='/home'>
+          {this.state.logedIn ? <Home /> : <Redirect to='/' /> }
+        </Route>
        <Route exact path='/LogOut'>
          {this.state.logedIn ? <LogOut loggedOut={this.loggedOut} /> : <Redirect to='/' /> }
        </Route>
