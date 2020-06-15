@@ -1,7 +1,7 @@
 import React from 'react'
 import { Redirect } from 'react-router'
 
-import { logIn, session } from '../api/api'
+import { logIn } from '../api/api'
 
 class LogIn extends React.Component {
   _isMounted = false
