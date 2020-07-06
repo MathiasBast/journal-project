@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 // const db = require('../db/db')
-const utils = require('../utils')
+const db = require('../db')
 
 const jwtSecret = process.env.SECRET_KEY
 const BCRYPT_SALT_ROUNDS = 12
@@ -22,33 +22,34 @@ passport.use(
     },
     (req, username, password, done) => {
       try {
-        utils.findUser(username, (err, resp) => {
-          if (err) {
-            return done(null, false, {
-              message: err.message
-            })
-          }
-          if (!resp.res) {
-            return done(null, false, {
-              message: 'username already taken'
-            })
-          }
-          bcrypt.hash(password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
-            utils.addUser({
-              username,
-              password: hashedPassword
-            }, (err, respo) => {
-              if (err) {
-                return done(null, false, {
-                  message: err.message
-                })
-              }
-              const user = { username, password: hashedPassword }
-              console.log('user created')
-              return done(null, user)
-            })
-          })
-        })
+        db.FindUser(username)
+        // utils.findUser(username, (err, resp) => {
+        //   if (err) {
+        //     return done(null, false, {
+        //       message: err.message
+        //     })
+        //   }
+        //   if (!resp.res) {
+        //     return done(null, false, {
+        //       message: 'username already taken'
+        //     })
+        //   }
+        //   bcrypt.hash(password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
+        //     utils.addUser({
+        //       username,
+        //       password: hashedPassword
+        //     }, (err, respo) => {
+        //       if (err) {
+        //         return done(null, false, {
+        //           message: err.message
+        //         })
+        //       }
+        //       const user = { username, password: hashedPassword }
+        //       console.log('user created')
+        //       return done(null, user)
+        //     })
+        //   })
+        // })
       } catch (err) {
         return done(err)
       }

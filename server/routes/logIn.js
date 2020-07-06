@@ -7,7 +7,7 @@ router.get('/:password/:username', (req, res) => {
   const { password, username } = req.params
   logIn(password, username)
     .then(dbRes => {
-      if(dbRes.logIn){
+      if (dbRes.logIn) {
         req.session.userID = dbRes.id
         req.session.userRev = dbRes.rev
       }
