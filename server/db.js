@@ -14,14 +14,28 @@ const couch = new NodeCouchDb({
 function FindUser (username) {
   return couch.get(dbName, viewUrl)
     .then(({ data, headers, status }) => {
-      console.log(data)
+      return data.rows.filter(user => user.username === username)
     })
+}
+
+function addUser (username, password) {
+  return couch.insert(dbName, {
+    _id: 'document_id',
+    field: ['sample', 'data', true]
+  }).then(({ data, headers, status }) => {
+    // data is json response
+    // headers is an object with all response headers
+    // status is statusCode number
+  }, err => {
+    // either request error occured
+    // ...or err.code=EDOCCONFLICT if document with the same id already exists
+  })
 }
 
 function logIn (thisPassword, thisUsername) {
   return couch.get(dbName, viewUrl)
     .then(({ data, headers, status }) => {
-      console.log(data)
+      console.log(data.rows[1].value)
       // var isUsername = false
       // var isPassword = false
       // var sendData = {}

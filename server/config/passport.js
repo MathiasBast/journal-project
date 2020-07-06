@@ -23,6 +23,28 @@ passport.use(
     (req, username, password, done) => {
       try {
         db.FindUser(username)
+          .then(user => {
+            if (user.length > 0) {
+              return done(null, false, {
+                message: 'username already taken'
+              })
+            }
+            bcrypt.hash(password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
+              db.addUser({
+                username,
+                password: hashedPassword
+              }, (err, respo) => {
+                if (err) {
+                  return done(null, false, {
+                    message: err.message
+                  })
+                }
+                const user = { username, password: hashedPassword }
+                console.log('user created')
+                return done(null, user)
+              })
+            })
+          })
         // utils.findUser(username, (err, resp) => {
         //   if (err) {
         //     return done(null, false, {
