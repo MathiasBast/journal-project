@@ -2,6 +2,7 @@ const NodeCouchDb = require('node-couchdb')
 
 const dbName = 'journal_users'
 const viewUrl = '_design/journal_users/_view/users'
+const dbId = '_design/journal_users'
 
 // dbcouch stuff
 const couch = new NodeCouchDb({
@@ -19,14 +20,18 @@ function FindUser (username) {
 }
 
 function addUser (username, password) {
+  const data = { username, password }
+  const sample = { username, password }
   return couch.insert(dbName, {
-    _id: 'document_id',
-    field: ['sample', 'data', true]
+    _id: dbId,
+    field: [sample, data, true]
   }).then(({ data, headers, status }) => {
+    console.log(data)
     // data is json response
     // headers is an object with all response headers
     // status is statusCode number
   }, err => {
+    console.log(err)
     // either request error occured
     // ...or err.code=EDOCCONFLICT if document with the same id already exists
   })
@@ -66,5 +71,6 @@ function logIn (thisPassword, thisUsername) {
 
 module.exports = {
   logIn,
-  FindUser
+  FindUser,
+  addUser
 }
