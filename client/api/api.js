@@ -4,16 +4,18 @@ const url = 'api/v1/posts/journal/'
 
 export function logIn (password, username) {
   return request.get(url + 'logIn/' + password + '/' + username)
-  .then(res => {
-    if(res.body) {
-      return {logIn: res.body}
-    } else {
-      return {logIn: false}
-    }
-  })
-  .catch(err => {
-    return {logIn: false}
-  })
+    .then(res => {
+      if (res.body) {
+        return { logIn: res.body }
+      } else {
+        return { logIn: false }
+      }
+    })
+    .catch(err => {
+      // eslint-disable-next-line no-console
+      console.log(err.message)
+      return { logIn: false }
+    })
 }
 
 export function session () {
@@ -24,15 +26,15 @@ export function session () {
     })
 }
 
-export function logOut() {
+export function logOut () {
   return request.get(url + 'logOut/')
-  .then(res=>{
-    console.log(res)
-  })
+    .then(res => {
+      console.log(res)
+    })
 }
 
 export function LogInCheck () {
-  return request.get(url +'sessionCookie/access')
+  return request.get(url + 'sessionCookie/access')
     .then(res => {
       console.log(res.body)
       return res.body
