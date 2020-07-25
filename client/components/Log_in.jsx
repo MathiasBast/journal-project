@@ -12,7 +12,7 @@ class LogIn extends React.Component {
       password: '',
       error: '',
       logIn: false,
-      runner: this.props.loggedIn
+      runner: this.props.loggedIn,
     }
   }
   componentDidMount () {
@@ -37,6 +37,10 @@ class LogIn extends React.Component {
 
   componentWillUnmount () {
     this._isMounted = false
+    var token = storage.getItem(token)
+    if (token){
+      this.setState({logIn: true})
+    }
   }
 
   handleUsernameChange = event => {
