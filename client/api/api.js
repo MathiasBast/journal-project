@@ -30,6 +30,7 @@ export function session () {
 export function logOut () {
   return request.get(url + 'logOut/')
     .then(res => {
+      storage.removeItem('token')
       console.log(res)
     })
 }
