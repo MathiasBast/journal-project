@@ -6,6 +6,7 @@ export function logIn (password, username) {
   return request.get(url + 'logIn/' + password + '/' + username)
     .then(res => {
       if (res.body) {
+        localStorage.setItem('token', res.body.token)
         return { logIn: res.body }
       } else {
         return { logIn: false }
